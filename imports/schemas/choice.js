@@ -1,11 +1,9 @@
-import SimpleSchema from 'simpl-schema';
-
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 const Choice = new SimpleSchema(
   {
     _id: {
       type: String,
-      required: true
     },
     keywords: {
       type: String,
