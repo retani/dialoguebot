@@ -5,6 +5,7 @@ const MultilingualTextSchema = new SimpleSchema(
   {
     de: {
       type: String,
+      defaultValue:"",
       uniforms: {
         component: LongTextField,
         className: 'languageField'
@@ -12,6 +13,7 @@ const MultilingualTextSchema = new SimpleSchema(
     },
     en: {
       type: String,
+      defaultValue:"",
       uniforms: {
         component: LongTextField,
         className: 'languageField'
@@ -21,7 +23,8 @@ const MultilingualTextSchema = new SimpleSchema(
   {
     clean: {
       getAutoValues: true
-    }
+    },
+    requiredByDefault: false
   }
 );
 
@@ -29,22 +32,24 @@ const MultilingualStringSchema = new SimpleSchema(
   {
     de: {
       type: String,
+      defaultValue:"",
       uniforms: {
         className: 'languageField'
       }
     },
     en: {
       type: String,
+      defaultValue:"",
       uniforms: {
         className: 'languageField'
       },
-      optional: true
     }
   },
   {
     clean: {
       getAutoValues: true
-    }
+    },
+    requiredByDefault: false
   }
 );
 

@@ -1,9 +1,11 @@
 import SimpleSchema from 'simpl-schema';
+import { Random } from 'meteor/random'
 
 const Choice = new SimpleSchema(
   {
     _id: {
       type: String,
+      defaultValue: Random.id(),
     },
     keywords: {
       type: String,
@@ -16,7 +18,8 @@ const Choice = new SimpleSchema(
       max:99999,
     },
     next_key: {
-      type: String
+      type: String,
+      defaultValue:"",
     }
 
   },

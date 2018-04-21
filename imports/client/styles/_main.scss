@@ -6,3 +6,15 @@
 //@import './components/page-content';
 //@import './components/checkbox';
 //@import './components/item';
+
+table {
+  border-collapse: collapse;
+  tr:hover {
+    background-color: rgba(0,0,0,0.2);
+    cursor: pointer;
+  }
+  td, th {
+    border: 1px black solid;
+    padding: 1ex;
+  }
+}

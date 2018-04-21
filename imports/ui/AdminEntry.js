@@ -16,7 +16,8 @@ class AdminEntry extends React.Component {
 
   save(doc) {
     if (!doc._id) {
-      Entries.insert(graph, this.saveCallback);
+      doc = entrySchema.clean(doc)
+      Entries.insert(doc, this.saveCallback);
     } else
     Entries.update(
         doc._id,
@@ -25,6 +26,15 @@ class AdminEntry extends React.Component {
         },
         this.saveCallback
       );
+  }
+
+  saveCallback(error, data, doc) {
+    if (error) {
+      console.log('Error - not saved');
+      console.log(error)
+    } else {
+      console.log("Saved")
+    }
   }
 
   renderForm() {
@@ -41,7 +51,7 @@ class AdminEntry extends React.Component {
     if (!this.props.ready) {
       return <p>Loading...</p>
     } else return (
-    <AdminContainer title={"Entry" + this.props.entry.key }>
+    <AdminContainer title={"Entry" + (this.props.entry ? this.props.entry.key : "new") }>
       {this.renderForm()}
     </AdminContainer>
   )};  
@@ -51,10 +61,11 @@ class AdminEntry extends React.Component {
 export default withTracker(props => {
   const entry_id = props.params.id;
   const sub = Meteor.subscribe('entries', {_id: entry_id});
+  const ready = sub.ready()
   const entry = Entries.findOne({_id: entry_id})
   return {
     language: Session.get("language"),
-    ready: sub.ready(),
+    ready,
     entry
   };
 })(withRouter(AdminEntry));

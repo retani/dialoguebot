@@ -3,13 +3,13 @@ import {
   MultilingualStringSchema,
   MultilingualTextSchema
 } from './multilingual';
-import Choice from './choice';
+import choiceSchema from './choice';
 import LongTextField from 'uniforms-bootstrap3/LongTextField';
 
 const entrySchemaDefinitions =   {
   key: {
     type: String,
-    //required: true
+    required: true,
   },
   text_display_delay: {
     type: SimpleSchema.Integer,
@@ -24,14 +24,27 @@ const entrySchemaDefinitions =   {
     max:99999
   },
   text_display: {
-    type: MultilingualStringSchema,      
+    type: MultilingualStringSchema,  
+    minCount: 1,
+    defaultValue: MultilingualStringSchema.clean({}),
   },
   text_speak: {
     type: MultilingualStringSchema,
+    minCount: 1,
+    defaultValue: MultilingualStringSchema.clean({}),
   },
   style_key: {
     type: String,
-    label: "Style"
+    label: "Style",
+    defaultValue: "normal",
+  },
+  choices: {
+    type: Array,
+    minCount: 1,
+    defaultValue: [choiceSchema.clean({})],
+  },
+  'choices.$': {
+    type: choiceSchema
   }
 }
 

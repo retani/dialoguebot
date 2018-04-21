@@ -39,11 +39,14 @@ class AdminEntries extends React.Component {
       index++
       const field = entry[key]
       let text = "-"
-      if (field[this.props.language])
+      console.log(field)
+      if (typeof(field[this.props.language])=="string")
         text = field[this.props.language]
+      else if (key == "choices")
+        text = Object.values(field[0]).join(' ')
       else
         text = field
-        console.log(field,text,this.props.language)
+      console.log("*"+text+"*")
       out.push(<td key={entry._id+index}>{text}</td>)
     }
     return out
@@ -77,6 +80,7 @@ class AdminEntries extends React.Component {
       return <p>Loading...</p>
     } else return (
     <AdminContainer title="Entries">
+      <Link to="/admin/entries/new">New</Link>
       {this.renderTable()}
     </AdminContainer>
   )};
