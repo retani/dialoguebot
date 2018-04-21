@@ -12,8 +12,4 @@ const PrivateHeader = (props) => {
   );
 };
 
-PrivateHeader.propTypes = {
-  title: React.PropTypes.string.isRequired
-};
-
 export default PrivateHeader;
