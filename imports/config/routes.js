@@ -6,6 +6,7 @@ import Signup from '../ui/Signup';
 import Dashboard from '../ui/Dashboard';
 import NotFound from '../ui/NotFound';
 import Login from '../ui/Login';
+import AdminEntries from '../ui/AdminEntries';
 
 import Home from '../ui/Home';
 
@@ -37,6 +38,7 @@ export const routes = (
   <Router history={browserHistory}>
     <Route path="/" component={Home}/>
     <Route path="/admin" component={Login} onEnter={onEnterPublicPage}/>
+    <Route path="/admin/entries" component={AdminEntries} onEnter={onEnterPrivatePage}/>
     <Route path="/signup" component={Signup} onEnter={onEnterPublicPage}/>
     <Route path="/dashboard" component={Dashboard} onEnter={onEnterPrivatePage}/>
     <Route path="*" component={NotFound}/>
