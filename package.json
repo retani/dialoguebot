@@ -1,5 +1,5 @@
 {
-  "name": "intergestalt-meteor-react-boilerplate",
+  "name": "hugbie",
   "private": true,
   "scripts": {
     "start": "meteor run"
