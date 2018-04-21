@@ -1,4 +1,4 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import SimpleSchema from 'simpl-schema';
 import LongTextField from 'uniforms-bootstrap3/LongTextField';
 
 const Style = new SimpleSchema(

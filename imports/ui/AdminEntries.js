@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
 import AdminContainer from './AdminContainer'
@@ -19,6 +19,7 @@ class AdminEntries extends React.Component {
 
   handleRowClick(entry_id) {
     console.log("edit entry "+entry_id)
+    browserHistory.replace('/admin/entries/'+entry_id);
   }
 
   renderHeaderCells(keys) {
@@ -42,6 +43,7 @@ class AdminEntries extends React.Component {
         text = field[this.props.language]
       else
         text = field
+        console.log(field,text,this.props.language)
       out.push(<td key={entry._id+index}>{text}</td>)
     }
     return out
@@ -71,8 +73,9 @@ class AdminEntries extends React.Component {
   }
 
   render() {
-    console.log(this.props.entries)
-    return (
+    if (!this.props.ready) {
+      return <p>Loading...</p>
+    } else return (
     <AdminContainer title="Entries">
       {this.renderTable()}
     </AdminContainer>

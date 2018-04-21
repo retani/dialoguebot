@@ -7,6 +7,7 @@ import Dashboard from '../ui/Dashboard';
 import NotFound from '../ui/NotFound';
 import Login from '../ui/Login';
 import AdminEntries from '../ui/AdminEntries';
+import AdminEntry from '../ui/AdminEntry';
 
 import Home from '../ui/Home';
 
@@ -39,6 +40,7 @@ export const routes = (
     <Route path="/" component={Home}/>
     <Route path="/admin" component={Login} onEnter={onEnterPublicPage}/>
     <Route path="/admin/entries" component={AdminEntries} onEnter={onEnterPrivatePage}/>
+    <Route path="/admin/entries/:id" component={AdminEntry} onEnter={onEnterPrivatePage}/>    
     <Route path="/signup" component={Signup} onEnter={onEnterPublicPage}/>
     <Route path="/dashboard" component={Dashboard} onEnter={onEnterPrivatePage}/>
     <Route path="*" component={NotFound}/>
