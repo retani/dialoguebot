@@ -31,11 +31,12 @@ table {
 }
 
 form {
+  * { font-size:16px; }
   > * {
     line-height:2em;
   }
   > div > div {
-    padding-left:1ex;
+    padding-left:0ex;
     &:first-child {
       padding-top:1ex;
     }
@@ -46,7 +47,23 @@ form {
     float:left;
   }
   input[type="submit"] {
-    width:5em;
+    padding:1ex;
+    margin-bottom: 1ex;
+    &:hover {
+      background-color: rgba(0,0,0,0.2);
+    }
+    &.submit-button-success {
+      background-color: green;
+      &::after {
+        content:"saved";
+      }
+    }
+    &.submit-button-error {
+      background-color: red;
+      &::after {
+        content:"error";
+      }
+    }    
   }
 }
 

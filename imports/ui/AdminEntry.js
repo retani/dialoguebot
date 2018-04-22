@@ -6,11 +6,17 @@ import AdminContainer from './AdminContainer'
 import Entries from '../collections/entries'
 import {entrySchema} from '../schemas/entry'
 import AutoForm from 'uniforms-unstyled/AutoForm';
+import SubmitField from 'uniforms-unstyled/SubmitField';
+import {Link} from 'react-router'
 
 class AdminEntry extends React.Component {
   constructor() {
     super()
+    this.state = {
+      buttonState: "neutral"
+    }
     this.save = this.save.bind(this)
+    this.saveCallback = this.saveCallback.bind(this)
     this.renderForm = this.renderForm.bind(this)
   }
 
@@ -34,18 +40,28 @@ class AdminEntry extends React.Component {
     if (error) {
       console.log('Error - not saved');
       console.log(error)
+      this.setState({buttonState: "error"})
     } else {
       console.log("Saved")
+      this.setState({buttonState: "success"})
+      setTimeout(()=>{
+        this.setState({buttonState: "neutral"})
+      },1000)
     }
   }
 
   renderForm() {
+    const MySubmitField = props => <SubmitField value="Save" className={"submit-button-" + this.state.buttonState} />
     return (
-      <AutoForm
-        schema={entrySchema}
-        onSubmit={doc => this.save(doc)}
-        model={this.props.entry}
-      />
+      <div>
+        <AutoForm
+          schema={entrySchema}
+          onSubmit={doc => this.save(doc)}
+          model={this.props.entry}
+          submitField={MySubmitField}
+        />
+        <Link className="back-button" to="/admin/entries">back</Link>
+      </div>
     );
   }
 
