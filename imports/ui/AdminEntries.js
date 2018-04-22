@@ -99,7 +99,7 @@ class AdminEntries extends React.Component {
     } else return (
     <AdminContainer title="Entries">
       <Link to="/admin/entries/new">New</Link>
-      {this.renderTable(this.props.entries, entrySchema, entrySchema._firstLevelSchemaKeys.filter(k => k != "_id"))}
+      {this.renderTable(this.props.entries, entrySchema, entrySchema._firstLevelSchemaKeys.filter(k => ["_id","style_key"].indexOf(k)===-1))}
       <code className="help-container">
         {regexpHelp}
       </code>

@@ -23,11 +23,12 @@ class AdminEntry extends React.Component {
   save(doc) {
     console.log(doc._id)
     if (!doc._id) {
-      doc = entrySchema.clean(doc)
+      doc = this.sanitize(doc)
       console.log("inserting new entry")
       Entries.insert(doc, this.saveCallback);
     } else{
-      doc = entrySchema.clean(doc)
+      doc = this.sanitize(doc)
+      console.log("saving",doc)
       Entries.update(
         doc._id,
         {
@@ -35,6 +36,13 @@ class AdminEntry extends React.Component {
         },
         this.saveCallback
       )};
+  }
+
+  sanitize(doc) {
+    id = doc._id
+    doc = entrySchema.clean(doc)
+    if (id) doc._id = id
+    return doc
   }
 
   saveCallback(error, data, doc) {

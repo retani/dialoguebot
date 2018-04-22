@@ -16,7 +16,8 @@ class Player extends React.Component {
     Session.set("pointer", "A100")
     this.resetState = {
       text_display: "",
-      listening: false
+      listening: false,
+      style: "normal"
     }    
     this.state = this.resetState
     this.reset = this.reset.bind(this)
@@ -38,6 +39,11 @@ class Player extends React.Component {
 
   start() {
     console.log("start with ", this.props.entry.key)
+    console.log(this.props.entry.text_speak[this.props.language])
+    if (this.props.entry.text_speak[this.props.language] == "") {
+      console.log("empty")
+      this.setState({style:"audience"})
+    }
     this.playerController = new PlayerController(this.props.entry, {
       display: (text)=>{
         this.setState({text_display:text[this.props.language]})
@@ -84,7 +90,7 @@ class Player extends React.Component {
           &nbsp;
           {this.state.listening && <span>&#x25C9;</span>}
         </div>
-        <div className="screen">
+        <div className={"screen style-"+this.state.style}>
           {this.state.text_display}
         </div>
       </div>

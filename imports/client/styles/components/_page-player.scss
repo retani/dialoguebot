@@ -13,6 +13,9 @@
     top:50%;
     transform: translateY(-50%);
     background-color: #111;
+    &.style-audience {
+      color:lightgreen;
+    }
   }
 
   .controls {

@@ -10,7 +10,7 @@ import LongTextField from 'uniforms-unstyled/LongTextField';
 const entrySchemaDefinitions =   {
   _id: {
     type: String,
-    defaultValue: Random.id(),
+    autoValue: ()=>Random.id(),
     uniforms: { component: () => null },
   },  
   key: {
@@ -49,6 +49,7 @@ const entrySchemaDefinitions =   {
     type: String,
     label: "Style",
     defaultValue: "normal",
+    uniforms: { component: () => null },
   },
   choices: {
     type: Array,

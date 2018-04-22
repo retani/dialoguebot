@@ -9,9 +9,9 @@ const regexpHelp = `
   match "hello you" only at the end:        hello you$
   match "hello" or "hi" anywhere:           hello|hi
   starts with "hello" and ends with "you": ^hello .* you$
-  grab exactly one word:                    my name is (\S+)
-  grab exactly two words:                   my name is (\S+) (\S+)
-  grab anything:                            my name is (.*)          
+  grab exactly one word:                    my name is (\\S+)
+  grab exactly two words:                   my name is (\\S+) (\\S+)
+  grab anything until end of sentence:      my name is (.*)$         
   
   https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/RegExp
 `
