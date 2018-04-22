@@ -3,8 +3,8 @@ import { Link } from 'react-router';
 
 export default () => {
   return (
-    <div>
-      <nav className="page-content">
+    <div className="page-content page-home">
+      <nav>
         <ul>
           <li>
             <Link to="/bot">Bot</Link>
@@ -14,6 +14,12 @@ export default () => {
           </li>
         </ul>
       </nav>
+      <figure className="qr-code">
+        <img src="/qr-hugbie.herokuapp.com.png" />
+        <figcaption>
+        <small>^ URL of this page</small>
+        </figcaption>
+      </figure>
     </div>
   );
 };

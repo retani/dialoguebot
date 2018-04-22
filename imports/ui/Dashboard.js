@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router'
 
 import PrivateHeader from './PrivateHeader';
 
@@ -7,7 +8,7 @@ export default () => {
     <div>
       <PrivateHeader title="Dashboard"/>
       <div className="page-content">
-        Dashboard page content.
+        <Link to="/admin/entries">Edit Entries</Link>
       </div>
     </div>
   );
