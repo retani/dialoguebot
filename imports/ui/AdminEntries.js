@@ -23,12 +23,14 @@ class AdminEntries extends React.Component {
     browserHistory.push('/admin/entries/'+entry_id);
   }
 
-  renderHeaderCells(keys, prefix) {
+  renderHeaderCells(keys, schema, prefix) {
     let cells = []
     let index = 0
     for (let key of keys) {
       index++
-      cells.push(<th key={"tablehead"+index+prefix}>{key}</th>)
+      let text = schema._schema[key]['label'] || key
+      let className = schema._schema[key]['columnclass'] || ""
+      cells.push(<th field={key} className={className} key={"tablehead"+index+prefix}>{text}</th>)
     }
     return cells
   }
@@ -40,12 +42,13 @@ class AdminEntries extends React.Component {
       index++
       const field = entry[key]
       let text = "-"
+      //console.log(field)
       if (typeof(field[this.props.language])=="string") {
           text = field[this.props.language]
         }
       else if (key == "choices") {
           subkeys = choiceSchema._firstLevelSchemaKeys.filter(k => k != "_id");
-          text = this.renderTable(field, subkeys,entry._id)
+          text = this.renderTable(field, choiceSchema, subkeys,entry._id)
         }
       else {
         text = field
@@ -63,7 +66,9 @@ class AdminEntries extends React.Component {
     return out
   }
 
-  renderTable(items, keys, prefix=0) {
+  renderTable(items, schema, keys, prefix=0) {
+    console.log(items)
+
     const rows = items.map(entry => {
       return (
         <tr key={entry._id} onClick={()=>this.handleRowClick(entry._id)}>
@@ -76,7 +81,7 @@ class AdminEntries extends React.Component {
       <table key={"table"+prefix}>
         <thead>
           <tr key={"tablehead"+prefix}>
-            {this.renderHeaderCells(keys, prefix)}
+            {this.renderHeaderCells(keys, schema, prefix)}
           </tr>
         </thead>
         <tbody>
@@ -87,12 +92,13 @@ class AdminEntries extends React.Component {
   }
 
   render() {
+    console.log(entrySchema._schema['text_display_delay']['label'])
     if (!this.props.ready) {
       return <p>Loading...</p>
     } else return (
     <AdminContainer title="Entries">
       <Link to="/admin/entries/new">New</Link>
-      {this.renderTable(this.props.entries, entrySchema._firstLevelSchemaKeys)}
+      {this.renderTable(this.props.entries, entrySchema, entrySchema._firstLevelSchemaKeys.filter(k => k != "_id"))}
     </AdminContainer>
   )};
 };

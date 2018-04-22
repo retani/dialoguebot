@@ -1,3 +1,4 @@
+import { Random } from 'meteor/random'
 import SimpleSchema from 'simpl-schema';
 import {
   MultilingualStringSchema,
@@ -7,23 +8,30 @@ import choiceSchema from './choice';
 import LongTextField from 'uniforms-unstyled/LongTextField';
 
 const entrySchemaDefinitions =   {
+  _id: {
+    type: String,
+    defaultValue: Random.id(),
+    uniforms: { component: () => null },
+  },  
   key: {
     type: String,
     required: true,
   },
   text_display_delay: {
     label: "Text display delay (s)",
-    type: SimpleSchema.Integer,
+    type: Number,
     defaultValue: 0,
     min:0,
     max:999,
+    columnclass:"narrow",
   },
   text_speak_delay: {
     label: "Text speak delay (s)",
-    type: SimpleSchema.Integer,
+    type: Number,
     defaultValue: 0,
     min:0,
-    max:999
+    max:999,
+    columnclass:"narrow",
   },
   text_display: {
     label: "Text to display",
@@ -45,10 +53,11 @@ const entrySchemaDefinitions =   {
   choices: {
     type: Array,
     minCount: 1,
-    defaultValue: [choiceSchema.clean({})],
+    //defaultValue: [choiceSchema.clean({})],
+    defaultValue: [],
   },
   'choices.$': {
-    type: choiceSchema
+    type: choiceSchema,
   }
 }
 

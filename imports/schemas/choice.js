@@ -13,10 +13,12 @@ const Choice = new SimpleSchema(
       defaultValue:"",
     },
     post_delay: {
-      type: SimpleSchema.Integer,
+      label: "Post Delay (s)",
+      type: Number,
       defaultValue: 0,
       min:0,
       max:999,
+      columnclass:"narrow",
     },
     next_key: {
       type: String,

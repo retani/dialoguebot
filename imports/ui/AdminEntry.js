@@ -15,8 +15,10 @@ class AdminEntry extends React.Component {
   }
 
   save(doc) {
+    console.log(doc._id)
+    doc = entrySchema.clean(doc)
+    console.log(doc._id)
     if (!doc._id) {
-      doc = entrySchema.clean(doc)
       Entries.insert(doc, this.saveCallback);
     } else
     Entries.update(
