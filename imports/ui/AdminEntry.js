@@ -51,7 +51,7 @@ class AdminEntry extends React.Component {
     if (!this.props.ready) {
       return <p>Loading...</p>
     } else return (
-    <AdminContainer title={"Entry" + (this.props.entry ? this.props.entry.key : "new") }>
+    <AdminContainer title={"Entry " + (this.props.entry ? this.props.entry.key : "new") }>
       {this.renderForm()}
     </AdminContainer>
   )};  

@@ -12,23 +12,27 @@ const entrySchemaDefinitions =   {
     required: true,
   },
   text_display_delay: {
+    label: "Text display delay (s)",
     type: SimpleSchema.Integer,
     defaultValue: 0,
     min:0,
-    max:99999,
+    max:999,
   },
   text_speak_delay: {
+    label: "Text speak delay (s)",
     type: SimpleSchema.Integer,
     defaultValue: 0,
     min:0,
-    max:99999
+    max:999
   },
   text_display: {
+    label: "Text to display",
     type: MultilingualStringSchema,  
     minCount: 1,
     defaultValue: MultilingualStringSchema.clean({}),
   },
   text_speak: {
+    label: "Text to speak",
     type: MultilingualStringSchema,
     minCount: 1,
     defaultValue: MultilingualStringSchema.clean({}),

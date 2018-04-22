@@ -44,15 +44,15 @@ Meteor.startup(() => {
     const choice = choiceSchema.clean({
       _id: "initial",
       keywords:"hi",
-      post_delay: 1000,
+      post_delay: 1,
       next_key:""
     })
     const entry = entrySchema.clean({
       key:"A100",
       text_display:{en:"Hi"},
-      text_display_delay: 1000,
+      text_display_delay: 1,
       text_speak:{en:"I say hi"},
-      text_speak_delay: 2000,
+      text_speak_delay: 2,
       style_key: "normal",
       choices: [choice]
     })

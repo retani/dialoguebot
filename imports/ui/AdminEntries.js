@@ -5,6 +5,7 @@ import { Session } from 'meteor/session';
 import AdminContainer from './AdminContainer'
 import Entries from '../collections/entries'
 import {entrySchema} from '../schemas/entry'
+import choiceSchema from '../schemas/choice'
 //import ReactDataGrid from 'react-data-grid';
 
 class AdminEntries extends React.Component {
@@ -14,20 +15,19 @@ class AdminEntries extends React.Component {
     this.renderCells = this.renderCells.bind(this)
     this.renderHeaderCells = this.renderHeaderCells.bind(this)
     this.handleRowClick = this.handleRowClick.bind(this)
-    this.keys = entrySchema._firstLevelSchemaKeys
   }
 
   handleRowClick(entry_id) {
     console.log("edit entry "+entry_id)
-    browserHistory.replace('/admin/entries/'+entry_id);
+    browserHistory.push('/admin/entries/'+entry_id);
   }
 
-  renderHeaderCells(keys) {
+  renderHeaderCells(keys, prefix) {
     let cells = []
     let index = 0
-    for (let key of this.keys) {
+    for (let key of keys) {
       index++
-      cells.push(<th key={"tablehead"+index}>{key}</th>)
+      cells.push(<th key={"tablehead"+index+prefix}>{key}</th>)
     }
     return cells
   }
@@ -35,37 +35,41 @@ class AdminEntries extends React.Component {
   renderCells(entry, keys) {
     let out = []
     let index = 0
-    for (let key of this.keys) {
+    for (let key of keys) {
       index++
       const field = entry[key]
       let text = "-"
       console.log(field)
-      if (typeof(field[this.props.language])=="string")
-        text = field[this.props.language]
-      else if (key == "choices")
-        text = Object.values(field[0]).join(' ')
-      else
+      if (typeof(field[this.props.language])=="string") {
+          text = field[this.props.language]
+        }
+      else if (key == "choices") {
+          subkeys = choiceSchema._firstLevelSchemaKeys.filter(k => k != "_id");
+          text = this.renderTable(field, subkeys,entry._id)
+        }
+      else {
         text = field
+      }
       console.log("*"+text+"*")
       out.push(<td key={entry._id+index}>{text}</td>)
     }
     return out
   }
 
-  renderTable() {
-    const rows = this.props.entries.map(entry => {
+  renderTable(items, keys, prefix=0) {
+    const rows = items.map(entry => {
       return (
         <tr key={entry._id} onClick={()=>this.handleRowClick(entry._id)}>
-          {this.renderCells(entry, this.keys)}
+          {this.renderCells(entry, keys)}
         </tr>
       );
     })
 
     return (
-      <table>
+      <table key={"table"+prefix}>
         <thead>
-          <tr key="tablehead">
-            {this.renderHeaderCells(this.keys)}
+          <tr key={"tablehead"+prefix}>
+            {this.renderHeaderCells(keys, prefix)}
           </tr>
         </thead>
         <tbody>
@@ -81,7 +85,7 @@ class AdminEntries extends React.Component {
     } else return (
     <AdminContainer title="Entries">
       <Link to="/admin/entries/new">New</Link>
-      {this.renderTable()}
+      {this.renderTable(this.props.entries, entrySchema._firstLevelSchemaKeys)}
     </AdminContainer>
   )};
 };

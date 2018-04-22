@@ -6,6 +6,7 @@ const Choice = new SimpleSchema(
     _id: {
       type: String,
       defaultValue: Random.id(),
+      uniforms: { component: () => null },
     },
     keywords: {
       type: String,
@@ -15,7 +16,7 @@ const Choice = new SimpleSchema(
       type: SimpleSchema.Integer,
       defaultValue: 0,
       min:0,
-      max:99999,
+      max:999,
     },
     next_key: {
       type: String,

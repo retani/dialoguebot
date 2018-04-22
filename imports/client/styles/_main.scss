@@ -1,20 +1,45 @@
-//@import './variables';
-//@import './base';
+@import './variables';
+@import './base';
 //@import './components/boxed-view';
-//@import './components/button';
-//@import './components/header';
+@import './components/button';
+@import './components/header';
 //@import './components/page-content';
 //@import './components/checkbox';
 //@import './components/item';
 
 table {
   border-collapse: collapse;
-  tr:hover {
-    background-color: rgba(0,0,0,0.2);
+  > tbody > tr:hover {
+    background-color: rgba(0,0,0,0.1);
     cursor: pointer;
   }
   td, th {
     border: 1px black solid;
     padding: 1ex;
+    table {
+      margin: calc(-1ex - 1px);
+      //margin: -1ex;
+      border:none;
+      tr:hover {
+        background-color: rgba(0,0,0,0);
+      }
+    }
+  }
+}
+
+form.form {
+  > * {
+    line-height:2em;
+  }
+  > div > div {
+    padding-left:1ex;
+    &:first-child {
+      padding-top:1ex;
+    }
+  }
+  label {
+    clear:left;
+    width:30ex;
+    float:left;
   }
 }
