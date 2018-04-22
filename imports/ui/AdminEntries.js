@@ -6,6 +6,7 @@ import AdminContainer from './AdminContainer'
 import Entries from '../collections/entries'
 import {entrySchema} from '../schemas/entry'
 import choiceSchema from '../schemas/choice'
+import {regexpHelp} from '../config/help'
 //import ReactDataGrid from 'react-data-grid';
 
 class AdminEntries extends React.Component {
@@ -99,6 +100,9 @@ class AdminEntries extends React.Component {
     <AdminContainer title="Entries">
       <Link to="/admin/entries/new">New</Link>
       {this.renderTable(this.props.entries, entrySchema, entrySchema._firstLevelSchemaKeys.filter(k => k != "_id"))}
+      <code className="help-container">
+        {regexpHelp}
+      </code>
     </AdminContainer>
   )};
 };

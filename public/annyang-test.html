@@ -1,0 +1,32 @@
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+<script>
+  window.addEventListener("load", function(event) {
+
+  	console.log("start")
+
+	if (annyang) {
+	  // Let's define a command. 
+	  annyang.debug(true)
+
+		var calculateFunction = function(month) { console.log(month); }
+		var commands = {
+		  // This example will accept any word as the "month"
+		  //'calculate :month hello': calculateFunction,
+		  // This example will only accept months which are at the start of a quarter
+		  'hi :something': {'regexp': /^hi (\S+ \S+)/, 'callback': calculateFunction}
+		} 
+
+	  // Add our commands to annyang 
+	  annyang.addCommands(commands);
+	 
+	  // Start listening. 
+	  annyang.start();
+	}
+
+
+
+  });	
+</script> 
+
+</html>

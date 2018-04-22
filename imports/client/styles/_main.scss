@@ -18,6 +18,8 @@ table {
     border: 1px black solid;
     padding: 1ex;
     table {
+      width: calc(100% + 2ex + 1px);
+      box-sizing:border-box;
       margin: calc(-1ex - 0.5px);
       //margin: -1ex;
       border:none;

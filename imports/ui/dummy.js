@@ -4,6 +4,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
 import AdminContainer from './AdminContainer'
 import Entries from '../collections/entries'
+
 //import ReactDataGrid from 'react-data-grid';
 
 class Dummy extends React.Component {
