@@ -10,6 +10,7 @@ import AdminEntries from '../ui/AdminEntries';
 import AdminEntry from '../ui/AdminEntry';
 
 import Home from '../ui/Home';
+import Player from '../ui/Player';
 
 
 const unauthenticatedPages = ['/admin', '/signup'];
@@ -38,6 +39,7 @@ export const onAuthChange = (isAuthenticated) => {
 export const routes = (
   <Router history={browserHistory}>
     <Route path="/" component={Home}/>
+    <Route path="/p" component={Player}/>
     <Route path="/admin" component={Login} onEnter={onEnterPublicPage}/>
     <Route path="/admin/entries" component={AdminEntries} onEnter={onEnterPrivatePage}/>
     <Route path="/admin/entries/:id" component={AdminEntry} onEnter={onEnterPrivatePage}/>    

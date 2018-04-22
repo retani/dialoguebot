@@ -4,6 +4,7 @@
 @import './components/button';
 @import './components/header';
 @import './components/page-content';
+@import './components/page-player';
 //@import './components/checkbox';
 //@import './components/item';
 
@@ -17,7 +18,7 @@ table {
     border: 1px black solid;
     padding: 1ex;
     table {
-      margin: calc(-1ex - 1px);
+      margin: calc(-1ex - 0.5px);
       //margin: -1ex;
       border:none;
       tr:hover {

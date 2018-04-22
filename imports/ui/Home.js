@@ -7,7 +7,7 @@ export default () => {
       <nav>
         <ul>
           <li>
-            <Link to="/bot">Bot</Link>
+            <Link to="/p">Bot</Link>
           </li>
           <li>
             <Link to="/admin">Admin</Link>
