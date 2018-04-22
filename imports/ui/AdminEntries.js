@@ -18,6 +18,7 @@ class AdminEntries extends React.Component {
   }
 
   handleRowClick(entry_id) {
+    return;
     console.log("edit entry "+entry_id)
     browserHistory.push('/admin/entries/'+entry_id);
   }
@@ -39,7 +40,6 @@ class AdminEntries extends React.Component {
       index++
       const field = entry[key]
       let text = "-"
-      console.log(field)
       if (typeof(field[this.props.language])=="string") {
           text = field[this.props.language]
         }
@@ -50,8 +50,15 @@ class AdminEntries extends React.Component {
       else {
         text = field
       }
-      console.log("*"+text+"*")
-      out.push(<td key={entry._id+index}>{text}</td>)
+      out.push(
+        <td key={entry._id+index}>
+        {key=="key" ?
+          <Link to={"/admin/entries/"+entry._id}>
+            {text}
+          </Link>
+        : text }
+        </td>
+      )
     }
     return out
   }

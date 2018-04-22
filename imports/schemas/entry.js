@@ -4,7 +4,7 @@ import {
   MultilingualTextSchema
 } from './multilingual';
 import choiceSchema from './choice';
-import LongTextField from 'uniforms-bootstrap3/LongTextField';
+import LongTextField from 'uniforms-unstyled/LongTextField';
 
 const entrySchemaDefinitions =   {
   key: {

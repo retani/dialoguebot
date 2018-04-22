@@ -5,7 +5,7 @@ import { Session } from 'meteor/session';
 import AdminContainer from './AdminContainer'
 import Entries from '../collections/entries'
 import {entrySchema} from '../schemas/entry'
-import AutoForm from 'uniforms-bootstrap3/AutoForm';
+import AutoForm from 'uniforms-unstyled/AutoForm';
 
 class AdminEntry extends React.Component {
   constructor() {

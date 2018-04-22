@@ -1,5 +1,5 @@
 import SimpleSchema from 'simpl-schema';
-import LongTextField from 'uniforms-bootstrap3/LongTextField';
+import LongTextField from 'uniforms-unstyled/LongTextField';
 
 const MultilingualTextSchema = new SimpleSchema(
   {

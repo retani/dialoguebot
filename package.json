@@ -16,7 +16,7 @@
     "simpl-schema": "^1.5.0",
     "styled-components": "^3.2.6",
     "uniforms": "^1.24.1",
-    "uniforms-bootstrap3": "^1.24.1"
+    "uniforms-unstyled": "^1.24.1"
   },
   "engines": {
     "node": "8.8.1"

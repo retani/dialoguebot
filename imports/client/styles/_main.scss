@@ -11,7 +11,7 @@ table {
   border-collapse: collapse;
   > tbody > tr:hover {
     background-color: rgba(0,0,0,0.1);
-    cursor: pointer;
+    //cursor: pointer;
   }
   td, th {
     border: 1px black solid;
@@ -27,7 +27,7 @@ table {
   }
 }
 
-form.form {
+form {
   > * {
     line-height:2em;
   }
@@ -41,5 +41,8 @@ form.form {
     clear:left;
     width:30ex;
     float:left;
+  }
+  input[type="submit"] {
+    width:5em;
   }
 }
