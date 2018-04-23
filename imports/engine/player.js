@@ -37,7 +37,7 @@ class PlayerController {
           }          
           console.log("playerController: response to keywords: ", choice.keywords)
           setTimeout(()=>{
-            console.log("playerController: leave")
+            console.log("playerController: leave to "+choice.next_key)
             this.callbacks.leave(choice.next_key)
           }, choice['post_delay']*1000)          
         }
@@ -55,10 +55,12 @@ class PlayerController {
           this.commands = commands
           this.callbacks.listen(this.commands)
         } else {
+          const choice = this.entry.choices[0]
+          console.log(choice)
           setTimeout(()=>{
-            console.log("playerController: leave")
-            this.callbacks.leave(this.entry.choices[0]['next_key'])
-          }, this.entry.choices[0]['post_delay']*1000)
+            console.log("playerController: leave to "+choice.next_key)
+            this.callbacks.leave(choice['next_key'])
+          }, choice['post_delay']*1000)
         }
 
       break;

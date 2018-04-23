@@ -12,6 +12,7 @@ speak = function(text, cb) {
   };  
   Meteor.setTimeout(()=>{
     // https://stackoverflow.com/questions/23483990/speechsynthesis-api-onend-callback-not-working
+    console.log("start speak")
     window.speechSynthesis.speak(utterance);},1
   );
   Meteor.setTimeout(function() {

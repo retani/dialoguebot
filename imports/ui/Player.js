@@ -17,11 +17,12 @@ class Player extends React.Component {
     this.resetState = {
       text_display: "",
       listening: false,
-      style: "normal"
+      style: "normal",
     }    
     this.state = this.resetState
     this.reset = this.reset.bind(this)
     this.start = this.start.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   reset() {
@@ -30,18 +31,24 @@ class Player extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props)
     if (prevProps.entry && this.props.entry && prevProps.entry._id != this.props.entry._id) {
       this.start()
     }
     return true;
   }
 
+  handleClick() {
+    if (this.started) {
+      return;
+    } else {
+      this.started = true
+      this.start()
+    }    
+  }
+
   start() {
-    console.log("start with ", this.props.entry.key)
-    console.log(this.props.entry.text_speak[this.props.language])
+    console.log("starting with ", this.props.entry.key)
     if (this.props.entry.text_speak[this.props.language] == "") {
-      console.log("empty")
       this.setState({style:"audience"})
     }
     this.playerController = new PlayerController(this.props.entry, {
@@ -84,7 +91,7 @@ class Player extends React.Component {
   render() {
     return (
     <Beforeunload onBeforeunload={e => this.reset} >
-      <div className="page-player" onClick={this.start}>
+      <div className="page-player" onClick={this.handleClick}>
         <div className="controls">
           {this.props.pointer}
           &nbsp;
