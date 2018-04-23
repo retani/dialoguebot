@@ -2,8 +2,10 @@
   background-color: black;
   color:white;
   height:100vh;
+  //background-color: #111;
 
   .screen {
+    font-family: monospace;
     position: absolute;
     top:0;
     left:0;
@@ -12,9 +14,8 @@
     text-align:center;
     top:50%;
     transform: translateY(-50%);
-    background-color: #111;
     &.style-audience {
-      color:green;
+      color:rgb(44,255,44);
     }
   }
 
