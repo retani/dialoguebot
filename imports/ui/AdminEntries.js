@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
+
 import AdminContainer from './AdminContainer'
 import Entries from '../collections/entries'
 import {entrySchema} from '../schemas/entry'
@@ -103,6 +104,12 @@ class AdminEntries extends React.Component {
       <code className="help-container">
         {regexpHelp}
       </code>
+      <div>
+        <div style={{margin:"1em"}}>JSON</div>
+        <code style={{display:"none"}}>
+          {JSON.stringify(this.props.entries)}
+        </code>
+      </div>
     </AdminContainer>
   )};
 };

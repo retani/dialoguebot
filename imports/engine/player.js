@@ -36,7 +36,10 @@ class PlayerController {
             if (choice._id == data._id) { break; }
           }          
           console.log("playerController: response to keywords: ", choice.keywords)
-          this.callbacks.leave(choice.next_key)
+          setTimeout(()=>{
+            console.log("playerController: leave")
+            this.callbacks.leave(choice.next_key)
+          }, choice['post_delay']*1000)          
         }
 
         break;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
 import speak from '../client/speak';
@@ -109,4 +109,4 @@ export default withTracker(props => {
     entry,
     pointer
   };
-})(Player);
+})(withRouter(Player));
