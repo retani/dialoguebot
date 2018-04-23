@@ -7,13 +7,13 @@ import annyang from 'annyang';
 import Beforeunload from 'react-beforeunload';
 
 import Entries from '../collections/entries'
+import Players from '../collections/players'
 import PlayerController from '../engine/player'
 //import ReactDataGrid from 'react-data-grid';
 
 class Player extends React.Component {
   constructor(props) {
     super(props);
-    Session.set("pointer", "A100")
     this.resetState = {
       text_display: "",
       listening: false,
@@ -30,19 +30,47 @@ class Player extends React.Component {
     this.setState(this.resetState)
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.entry && this.props.entry && prevProps.entry._id != this.props.entry._id) {
+  componentDidMount() {
+    if (this.props.player && this.props.player.status == "play")
+       {
       this.start()
+    }
+  }
+
+  componentWillUnmount() {
+    Meteor.call("setPlayer", this.props.player.key, {status:"stop"})
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log(this.props, prevProps)
+    if (prevProps.entry && this.props.entry
+      && prevProps.entry.key != this.props.entry.key
+      ) {
+        if (this.props.player 
+          && this.props.player.status == "play")
+           {
+          this.start()
+        }
+      }
+    if (this.props.player && prevProps.player
+      && this.props.player.status == "play" && prevProps.player.status != "play")
+       {
+      this.start()
+    }
+    if (this.props.player && prevProps.player
+      && this.props.player.status == "stop" && prevProps.player.status != "stop")
+       {
+      this.reset()
     }
     return true;
   }
 
   handleClick() {
-    if (this.started) {
+    if (this.props.player.status == "play") {
       return;
     } else {
-      this.started = true
-      this.start()
+      Meteor.call("setPlayer", this.props.player.key, {status:"play"})
+      //this.start()
     }    
   }
 
@@ -51,16 +79,23 @@ class Player extends React.Component {
     if (this.props.entry.text_speak[this.props.language] == "") {
       this.setState({style:"audience"})
     }
-    this.playerController = new PlayerController(this.props.entry, {
-      display: (text)=>{
-        this.setState({text_display:text[this.props.language]})
-      },
-      speak: (text)=>{
+
+    const callbacks = {}
+    
+    callbacks.display = (text)=>{
+      this.setState({text_display:text[this.props.language]})
+    }
+    
+    if (this.props.capabilities.speak) {
+      callbacks.speak = (text)=>{
         speak(text[this.props.language], () =>
           this.playerController.action("speakEnd")
         )
-      },
-      listen: (commands)=>{
+      }
+    }
+
+    if (this.props.capabilities.listen) {
+      callbacks.listen = (commands)=>{
         let annyangCommands = {}
         Object.entries(commands).forEach((c)=>{
           annyangCommands[c[1]] = {
@@ -78,22 +113,34 @@ class Player extends React.Component {
         annyang.addCommands(annyangCommands);
         annyang.start();
         this.setState({"listening": true})
-      },
-      leave: (next_key) => {
-        this.reset();
-        if (this.props.pointer == next_key) { this.start() }
-        else Session.set({pointer:next_key})
       }
-    })
+    }
+
+    callbacks.leave = (next_key) => {
+      if (this.props.player.status != "play") return;
+      this.reset();
+      if (this.props.pointer == next_key) { this.start() }
+      Meteor.call("setPlayer", this.props.player.key, {pointer:next_key})
+    }
+
+    this.playerController = new PlayerController(this.props.entry, callbacks)
     this.playerController.action()
   }
 
   render() {
+    if (!this.props.ready) {
+      return <div>.</div>
+    }
     return (
     <Beforeunload onBeforeunload={e => this.reset} >
       <div className="page-player" onClick={this.handleClick}>
         <div className="controls">
+          {this.props.player.key}: &nbsp;
           {this.props.pointer}
+          &nbsp;
+          {this.props.capabilities.speak && "speak"}
+          &nbsp;
+          {this.props.capabilities.listen && "listen"}
           &nbsp;
           {this.state.listening && <span>&#x25C9;</span>}
         </div>
@@ -106,14 +153,21 @@ class Player extends React.Component {
 };
 
 export default withTracker(props => {
-  const pointer = Session.get("pointer")
-  const query = { key: pointer }
-  const sub = Meteor.subscribe('entries', query);
+  const sub2 = Meteor.subscribe('players', { key: props.params.key });
+  const player = Players.findOne();
+  const pointer = (player ? player.pointer : null)
+  const sub = Meteor.subscribe('entries', { key: pointer });
   const entry = Entries.findOne();
+  const capabilities = {
+    speak: props.location.query.speak != 0,
+    listen: props.location.query.listen != 0
+  }
   return {
     language: Session.get("language"),
-    ready: sub.ready(),
+    ready: sub.ready() && sub2.ready(),
     entry,
-    pointer
+    pointer,
+    player,
+    capabilities
   };
 })(withRouter(Player));

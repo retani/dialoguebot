@@ -21,6 +21,14 @@ class PlayerController {
     }    
   }
 
+  cb(callback, data) {
+    if (this.callbacks[callback]) {
+      this.callbacks[callback](data)
+    } else {
+      console.log("callback " + callback + " not defined")
+    }
+  }
+
   action(event, data) {
 
     switch(event) {
@@ -38,7 +46,7 @@ class PlayerController {
           console.log("playerController: response to keywords: ", choice.keywords)
           setTimeout(()=>{
             console.log("playerController: leave to "+choice.next_key)
-            this.callbacks.leave(choice.next_key)
+            this.cb("leave", choice.next_key)
           }, choice['post_delay']*1000)          
         }
 
@@ -53,13 +61,13 @@ class PlayerController {
             commands[c._id] = c.keywords
           }
           this.commands = commands
-          this.callbacks.listen(this.commands)
+          this.cb("listen",this.commands)
         } else {
           const choice = this.entry.choices[0]
           console.log(choice)
           setTimeout(()=>{
             console.log("playerController: leave to "+choice.next_key)
-            this.callbacks.leave(choice['next_key'])
+            this.cb("leave",choice['next_key'])
           }, choice['post_delay']*1000)
         }
 
@@ -70,14 +78,14 @@ class PlayerController {
         if (this.entry.text_display) {
           setTimeout(()=>{
             console.log("playerController: start display")
-            this.callbacks.display(this.entry.text_display)
+            this.cb("display", this.entry.text_display)
           }, this.entry.text_display_delay*1000)
         }
       
         if (this.entry.text_speak) {
           setTimeout(()=>{
             console.log("playerController: start speak")
-            this.callbacks.speak(this.entry.text_speak)
+            this.cb("speak", this.entry.text_speak)
           }, this.entry.text_speak_delay*1000)
         }
         

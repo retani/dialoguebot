@@ -39,7 +39,7 @@ export const onAuthChange = (isAuthenticated) => {
 export const routes = (
   <Router history={browserHistory}>
     <Route path="/" component={Home}/>
-    <Route path="/p" component={Player}/>
+    <Route path="/p/:key" component={Player}/>
     <Route path="/admin" component={Login} onEnter={onEnterPublicPage}/>
     <Route path="/admin/entries" component={AdminEntries} onEnter={onEnterPrivatePage}/>
     <Route path="/admin/entries/:id" component={AdminEntry} onEnter={onEnterPrivatePage}/>    

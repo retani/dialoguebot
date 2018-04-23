@@ -9,11 +9,16 @@ const PrivateHeader = (props) => {
         <h1 className="header__title">{props.title}</h1>
         <nav>
           <ul>
-          <li>
+            <li>
               <Link to="/">
                 Home
               </Link>
             </li>            
+            <li>
+              <Link to="/dashboard">
+                Dashboard
+              </Link>
+            </li>                      
             <li>
               <Link to="/admin/entries">
                 Entries
