@@ -116,9 +116,11 @@ class AdminEntries extends React.Component {
 
 export default withTracker(props => {
   const sub = Meteor.subscribe('entries');
+  const entries = Entries.find({},{sort: {key: 1}}).fetch()
+  if (entries) console.log(entries.map((p)=>p.key))
   return {
     language: Session.get("language"),
     ready: sub.ready(),
-    entries: Entries.find().fetch()
+    entries
   };
 })(AdminEntries);
