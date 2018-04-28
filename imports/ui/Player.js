@@ -26,6 +26,7 @@ class Player extends React.Component {
   }
 
   reset() {
+    if (this.playerController) this.playerController.action("abort")
     annyang.abort()
     this.setState(this.resetState)
   }
@@ -136,6 +137,8 @@ class Player extends React.Component {
           <span>
             {this.props.player && this.props.player.key}: &nbsp;
             {this.props.pointer}
+            &nbsp;
+            {this.props.player && this.props.player.status}
             &nbsp;
             {this.props.capabilities.speak && "speak"}
             &nbsp;

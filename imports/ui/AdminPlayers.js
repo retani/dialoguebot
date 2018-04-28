@@ -41,9 +41,12 @@ class AdminPlayers extends React.Component {
     })
 
     return (
-      <ul>
-        {players}
-      </ul>
+      <div className="players-list">
+        <h2>Control Players</h2>
+        <ul>
+          {players}
+        </ul>
+      </div>
     )
   }
 

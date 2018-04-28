@@ -2,8 +2,19 @@
   margin: 0 auto;
   max-width: $site-max-width;
   padding: $space;
+
+  ul {
+    list-style-type:none;
+  }
 }
 
 .help-container {
   white-space: pre;
+}
+
+.players-list {
+  button {
+    margin-left: 1ex;
+    padding:0.2ex;
+  }
 }

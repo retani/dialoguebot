@@ -33,6 +33,13 @@ class PlayerController {
 
     switch(event) {
 
+      case "abort":
+
+        console.log("playerController: abort")
+
+        if (this.timeout) clearTimeout(this.timeout)
+        break;
+
       case "listenResult":
 
         console.log("playerController: listenResult", data)
@@ -44,7 +51,7 @@ class PlayerController {
             if (choice._id == data._id) { break; }
           }          
           console.log("playerController: response to keywords: ", choice.keywords)
-          setTimeout(()=>{
+          this.timeout = setTimeout(()=>{
             console.log("playerController: leave to "+choice.next_key)
             this.cb("leave", choice.next_key)
           }, choice['post_delay']*1000)          
@@ -65,7 +72,7 @@ class PlayerController {
         } else {
           const choice = this.entry.choices[0]
           console.log(choice)
-          setTimeout(()=>{
+          this.timeout = setTimeout(()=>{
             console.log("playerController: leave to "+choice.next_key)
             this.cb("leave",choice['next_key'])
           }, choice['post_delay']*1000)
@@ -76,14 +83,14 @@ class PlayerController {
       default:
 
         if (this.entry.text_display) {
-          setTimeout(()=>{
+          this.timeout = setTimeout(()=>{
             console.log("playerController: start display")
             this.cb("display", this.entry.text_display)
           }, this.entry.text_display_delay*1000)
         }
       
         if (this.entry.text_speak) {
-          setTimeout(()=>{
+          this.timeout = setTimeout(()=>{
             console.log("playerController: start speak")
             this.cb("speak", this.entry.text_speak)
           }, this.entry.text_speak_delay*1000)

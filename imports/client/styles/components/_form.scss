@@ -39,8 +39,15 @@ form {
     }
   }
 
+  > ul {
+    overflow:hidden;
+  }
+
   > ul > div { // elements of a list
     border: lightgray solid 1px;
+    display:inline-block;
+    float:left;
+    clear: both;
     margin: 1ex;
     padding: 1ex;
     label {

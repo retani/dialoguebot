@@ -29,3 +29,14 @@ p {
 a {
   color: black;
 }
+
+.buttonlink {
+  text-decoration: none;
+  padding:1ex;
+  border:1px lightgrey solid;
+  background-color: #eee;
+  display: inline-block;
+  &:hover {
+    background-color: lightgrey;
+  }
+}

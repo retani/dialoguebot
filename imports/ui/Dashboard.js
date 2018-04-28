@@ -9,9 +9,12 @@ export default () => {
     <div>
       <PrivateHeader title="Dashboard"/>
       <div className="page-content">
-        <Link to="/admin/entries">Edit Entries</Link>
+        <section style={{marginBottom:"1.5em"}}>
+          <h2>Menu</h2>
+          <Link to="/admin/entries">Edit Entries</Link>
+        </section>
+        <AdminPlayers />
       </div>
-      <AdminPlayers />
     </div>
   );
 };

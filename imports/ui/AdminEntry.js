@@ -8,6 +8,7 @@ import {entrySchema} from '../schemas/entry'
 import AutoForm from 'uniforms-unstyled/AutoForm';
 import SubmitField from 'uniforms-unstyled/SubmitField';
 import {Link} from 'react-router'
+import {regexpHelp} from '../config/help'
 
 class AdminEntry extends React.Component {
   constructor() {
@@ -62,7 +63,7 @@ class AdminEntry extends React.Component {
   renderForm() {
     const MySubmitField = props => <SubmitField value="Save" className={"submit-button-" + this.state.buttonState} />
     return (
-      <div>
+      <div style={{float:"left"}}>
         <AutoForm
           schema={entrySchema}
           onSubmit={doc => this.save(doc)}
@@ -80,6 +81,9 @@ class AdminEntry extends React.Component {
     } else return (
     <AdminContainer title={"Entry " + (this.props.entry ? this.props.entry.key : "new") }>
       {this.renderForm()}
+      <code className="help-container" style={{float:"left"}}>
+        {regexpHelp}
+      </code>
     </AdminContainer>
   )};  
 
