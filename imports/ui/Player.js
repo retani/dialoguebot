@@ -75,6 +75,7 @@ class Player extends React.Component {
   }
 
   start() {
+    this.reset()
     console.log("starting with ", this.props.entry.key)
     if (this.props.entry.text_speak[this.props.language] == "") {
       this.setState({style:"audience"})
@@ -117,8 +118,8 @@ class Player extends React.Component {
     }
 
     callbacks.leave = (next_key) => {
-      if (this.props.player.status != "play") return;
       this.reset();
+      if (this.props.player.status != "play") return;
       if (this.props.pointer == next_key) { this.start() }
       Meteor.call("setPlayer", this.props.player.key, {pointer:next_key})
     }
@@ -128,25 +129,26 @@ class Player extends React.Component {
   }
 
   render() {
-    if (!this.props.ready) {
-      return <div>.</div>
-    }
     return (
     <Beforeunload onBeforeunload={e => this.reset} >
       <div className="page-player" onClick={this.handleClick}>
         <div className="controls">
-          {this.props.player.key}: &nbsp;
-          {this.props.pointer}
-          &nbsp;
-          {this.props.capabilities.speak && "speak"}
-          &nbsp;
-          {this.props.capabilities.listen && "listen"}
-          &nbsp;
+          <span>
+            {this.props.player && this.props.player.key}: &nbsp;
+            {this.props.pointer}
+            &nbsp;
+            {this.props.capabilities.speak && "speak"}
+            &nbsp;
+            {this.props.capabilities.listen && "listen"}
+            &nbsp;
+          </span>
           {this.state.listening && <span>&#x25C9;</span>}
         </div>
-        <div className={"screen style-"+this.state.style}>
-          {this.state.text_display}
-        </div>
+        {this.props.ready &&
+          <div className={"screen style-"+this.state.style}>
+            {this.state.text_display}
+          </div>
+        }
       </div>
     </Beforeunload>
   )};
@@ -160,7 +162,7 @@ export default withTracker(props => {
   const entry = Entries.findOne();
   const capabilities = {
     speak: props.location.query.speak != 0,
-    listen: props.location.query.listen != 0
+    listen: props.location.query.listen != 0,
   }
   return {
     language: Session.get("language"),
