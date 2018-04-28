@@ -1,0 +1,87 @@
+form {
+  * { 
+    font-size:16px; 
+  }
+  
+  > * { // first level fields and labels
+    *:not(label) { // second level content
+    }
+    * > span { // + and - buttons
+      color:$brand-primary;
+      border:1px black solid;
+      width:0.85em;
+      height:0.85em;
+      line-height: 0.85;
+      margin-left: 0.5em;
+      display: inline-block;
+      text-align: center;
+      font-weight: bold;
+      cursor: pointer;
+      &:hover {
+        background-color:lightgrey;
+      }
+    }
+    input {
+      font-size: 85%;
+    }
+  }
+  
+  > * > div { // second level
+    label { // second level label
+      transform: translateX(2ex);
+    }
+    label, input {
+      font-size: 85%;
+    }
+    clear: both;
+    &:first-of-type {
+      margin-top:1ex;
+    }
+  }
+
+  > ul > div { // elements of a list
+    border: lightgray solid 1px;
+    margin: 1ex;
+    padding: 1ex;
+    label {
+      transform: none;
+    }
+    span {
+      margin-left: 0;
+    }
+  }
+
+  label {
+    clear:left;
+    width:20rem;
+    float:left;
+  }
+
+  label, input {
+    padding:0.25em;
+    line-height: 1em;
+  }
+
+  input[type="submit"] {
+    cursor: pointer;
+    padding:1ex;
+    margin-top: 2ex;
+    margin-bottom: 1ex;
+    background-color: rgb(244,244,244);
+    &:hover {
+      background-color: rgba(0,0,0,0.2);
+    }
+    &.submit-button-success {
+      background-color: green;
+      &::after {
+        content:"saved";
+      }
+    }
+    &.submit-button-error {
+      background-color: red;
+      &::after {
+        content:"error";
+      }
+    }    
+  }
+}
