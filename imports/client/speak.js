@@ -4,7 +4,8 @@ speak = function(text, cb) {
   var utterance = new SpeechSynthesisUtterance(text);
   if (!utterance) return false
   utterance.lang = 'en-US';
-  utterance.rate = 0.8;
+  utterance.rate = 1;
+  utterance.pitch = 1;
   var ended = false
   utterance.onend = function(event) {
       ended = true
