@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
+import moment from 'moment';
 
 import AdminContainer from './AdminContainer'
 import Entries from '../collections/entries'
@@ -17,6 +18,30 @@ class AdminEntries extends React.Component {
     this.renderCells = this.renderCells.bind(this)
     this.renderHeaderCells = this.renderHeaderCells.bind(this)
     this.handleRowClick = this.handleRowClick.bind(this)
+  }
+
+  handleImport(event) {
+    const target = event.target
+    if (!confirm("overwrite current entries?")) {
+      target.value = null;
+      return;
+    }
+    console.log(target)
+    fr = new FileReader();
+    fr.onload = (progress)=>{
+      //target.value = null;
+      const data = progress.currentTarget.result
+      let json = null
+      try {
+        json = JSON.parse(data)
+      } catch(err) {
+        alert("error")
+        return;
+      }
+      console.log("received", json)
+      Meteor.call('importEntries', json)
+    };
+    fr.readAsText(target.files[0]);
   }
 
   handleRowClick(entry_id) {
@@ -103,11 +128,11 @@ class AdminEntries extends React.Component {
       <code className="help-container">
         {regexpHelp}
       </code>
-      <div>
-        <div style={{margin:"1em"}}>JSON</div>
-        <code style={{display:"none"}}>
-          {JSON.stringify(this.props.entries)}
-        </code>
+      <div className="import_export">
+        <br />
+        <a href={"data:application/json;;base64,"+btoa(JSON.stringify(this.props.entries))} download={`entries-${moment().format('YYYYMMDD-HHmm')}.json`} >Export Entries (to json file)</a>
+        <br />
+        <span className="link">Import Entries (from json file): <input type="file" onChange={this.handleImport}/></span>
       </div>
     </AdminContainer>
   )};
