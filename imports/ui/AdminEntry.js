@@ -7,7 +7,7 @@ import Entries from '../collections/entries'
 import {entrySchema} from '../schemas/entry'
 import AutoForm from 'uniforms-unstyled/AutoForm';
 import SubmitField from 'uniforms-unstyled/SubmitField';
-import {Link} from 'react-router'
+import {Link, browserHistory} from 'react-router'
 import {regexpHelp} from '../config/help'
 
 class AdminEntry extends React.Component {
@@ -39,6 +39,13 @@ class AdminEntry extends React.Component {
       )};
   }
 
+  delete(doc) {
+    if (confirm(`delete ${doc.key} ?`)) {
+      browserHistory.go(-1)
+      Entries.remove(doc._id)
+    } 
+  }
+
   sanitize(doc) {
     id = doc._id
     doc = entrySchema.clean(doc)
@@ -63,13 +70,15 @@ class AdminEntry extends React.Component {
   renderForm() {
     const MySubmitField = props => <SubmitField value="Save" className={"submit-button-" + this.state.buttonState} />
     return (
-      <div style={{float:"left"}}>
+      <div style={{float:"left"}} className={this.constructor.name}>
         <AutoForm
           schema={entrySchema}
           onSubmit={doc => this.save(doc)}
           model={this.props.entry}
           submitField={MySubmitField}
         />
+        {this.props.entry && <a className="delete-button link" onClick={()=>this.delete(this.props.entry)}>delete</a>}
+        <br /><br />
         <Link className="back-button" to="/admin/entries">back</Link>
       </div>
     );

@@ -50,7 +50,7 @@ class AdminEntries extends React.Component {
         }
       else if (key == "choices") {
           subkeys = choiceSchema._firstLevelSchemaKeys.filter(k => k != "_id");
-          text = this.renderTable(field, choiceSchema, subkeys,entry._id)
+          text = this.renderTable(field, choiceSchema, subkeys, entry._id)
         }
       else {
         text = field
@@ -80,7 +80,7 @@ class AdminEntries extends React.Component {
     })
 
     return (
-      <table key={"table"+prefix}>
+      <table key={"table"+prefix} className={this.constructor.name}>
         <thead>
           <tr key={"tablehead"+prefix}>
             {this.renderHeaderCells(keys, schema, prefix)}
@@ -94,7 +94,6 @@ class AdminEntries extends React.Component {
   }
 
   render() {
-    console.log(entrySchema._schema['text_display_delay']['label'])
     if (!this.props.ready) {
       return <p>Loading...</p>
     } else return (

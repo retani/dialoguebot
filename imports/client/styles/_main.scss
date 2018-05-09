@@ -6,6 +6,7 @@
 @import './components/form';
 @import './components/page-content';
 @import './components/page-player';
+@import './components/AdminEntries';
 //@import './components/checkbox';
 //@import './components/item';
 
@@ -27,10 +28,26 @@ table {
       tr:hover {
         background-color: rgba(0,0,0,0);
       }
+      thead tr:first-of-type > * {
+        border-top-width:0;
+      }
+      tbody tr:last-of-type > * {
+        border-bottom-width:0;
+      }      
+      td:first-child, th:first-child {
+        border-left-width:0;
+      }
+      td:last-child, th:last-child {
+        border-right-width:0;
+      }      
     }
   }
   th.narrow {
     width:2em;
+    font-size:55%;
+  }
+  tr:not(:first-of-type) table thead {
+   display:none;
   }
 }
 

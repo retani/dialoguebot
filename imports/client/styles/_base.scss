@@ -26,8 +26,10 @@ p {
   margin-bottom: $space;
 }
 
-a {
+a, link {
   color: black;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .buttonlink {
@@ -38,5 +40,12 @@ a {
   display: inline-block;
   &:hover {
     background-color: lightgrey;
+  }
+}
+
+
+.delete-button {
+  &:hover {
+    color: red;
   }
 }
