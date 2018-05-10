@@ -9,6 +9,8 @@ import Entries from '../collections/entries'
 import {entrySchema} from '../schemas/entry'
 import choiceSchema from '../schemas/choice'
 import {regexpHelp} from '../config/help'
+import {entryStyle} from '../engine/helper'
+
 //import ReactDataGrid from 'react-data-grid';
 
 class AdminEntries extends React.Component {
@@ -69,6 +71,7 @@ class AdminEntries extends React.Component {
       index++
       const field = entry[key]
       let text = "-"
+      const className = (key == "text_display" ? (entryStyle(entry, this.props.language) ? "audience" : "normal") : null )
       //console.log(field)
       if (typeof(field[this.props.language])=="string") {
           text = field[this.props.language]
@@ -81,7 +84,7 @@ class AdminEntries extends React.Component {
         text = field
       }
       out.push(
-        <td key={entry._id+index}>
+        <td className={className} key={entry._id+index}>
         {key=="key" ?
           <Link to={"/admin/entries/"+entry._id}>
             {text}

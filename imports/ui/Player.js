@@ -9,6 +9,7 @@ import Beforeunload from 'react-beforeunload';
 import Entries from '../collections/entries'
 import Players from '../collections/players'
 import PlayerController from '../engine/player'
+import {entryStyle} from '../engine/helper'
 //import ReactDataGrid from 'react-data-grid';
 
 class Player extends React.Component {
@@ -78,7 +79,7 @@ class Player extends React.Component {
   start() {
     this.reset()
     console.log("starting with ", this.props.entry.key)
-    if (this.props.entry.text_speak[this.props.language] == "") {
+    if (entryStyle(this.props.entry, this.props.language)) {
       this.setState({style:"audience"})
     }
 

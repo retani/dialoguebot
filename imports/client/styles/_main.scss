@@ -20,10 +20,8 @@ table {
     border: 1px black solid;
     padding: 1ex;
     table {
-      width: calc(100% + 2ex + 1px);
-      box-sizing:border-box;
-      margin: calc(-1ex - 0.5px);
-      //margin: -1ex;
+      width: calc(100% + 2ex);
+      margin: -1ex;
       border:none;
       tr:hover {
         background-color: rgba(0,0,0,0);
@@ -46,9 +44,12 @@ table {
     width:2em;
     font-size:55%;
   }
-  tr:not(:first-of-type) table thead {
+  tr:not(:first-of-type) table {thead {
    display:none;
   }
+  tbody tr:first-of-type > * {
+    border-top-width:0;
+  }}
 }
 
 .header {
