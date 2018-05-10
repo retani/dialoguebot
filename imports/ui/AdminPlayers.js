@@ -15,7 +15,10 @@ class AdminPlayers extends React.Component {
     }
 
   handleResetButton(p) {
-      Meteor.call("setPlayer", p.key, {status: "stop", "pointer":"A100"} )
+      Meteor.call("getInitialEntry", null, (result,entry)=>{
+        console.log(result, entry)
+        Meteor.call("setPlayer", p.key, {status: "stop", "pointer":entry.key} )
+      })
     }    
 
   renderPlayers() {

@@ -26,7 +26,7 @@ const entrySchemaDefinitions =   {
     columnclass:"narrow",
   },
   text_speak_delay: {
-    label: "Text speak delay (s)",
+    label: "Text speak or listen delay (s)",
     type: Number,
     defaultValue: 0,
     min:0,

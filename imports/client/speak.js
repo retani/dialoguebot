@@ -21,7 +21,7 @@ speak = function(text, cb) {
       console.log("should have ended. Trigger callback!")
       cb()
     }
-  }, 500 * text.length); // there is a problem with onEnded, as it seem to fail sometimes. This is a fallback. Superficial assunmption is that that each letter needs somehow less than 500ms to pronounce
+  }, 2 * 500 * text.length); // there is a problem with onEnded, as it seem to fail sometimes. This is a fallback. Superficial assunmption is that that each letter needs somehow less than 500ms to pronounce
 }
 
 export default speak

@@ -6,6 +6,9 @@ Meteor.methods({
   'example'({ }) {
     // do something
   },
+  'getInitialEntry'() {
+    return Entries.findOne({},{sort: {key: 1}})
+  },    
   'setPlayer'(key,data) {
     console.log(key,data)
     Players.update({key},{$set:data})
