@@ -108,7 +108,7 @@ class AdminEntries extends React.Component {
     })
 
     return (
-      <table key={"table"+prefix} className={this.constructor.name}>
+      <table key={"table"+prefix} className="AdminEntries">
         <thead>
           <tr key={"tablehead"+prefix}>
             {this.renderHeaderCells(keys, schema, prefix)}

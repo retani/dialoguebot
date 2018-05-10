@@ -70,7 +70,7 @@ class AdminEntry extends React.Component {
   renderForm() {
     const MySubmitField = props => <SubmitField value="Save" className={"submit-button-" + this.state.buttonState} />
     return (
-      <div style={{float:"left"}} className={this.constructor.name}>
+      <div style={{float:"left"}} className="AdminEntry">
         <AutoForm
           schema={entrySchema}
           onSubmit={doc => this.save(doc)}
