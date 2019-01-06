@@ -63,7 +63,7 @@ class PlayerController {
 
         if (this.entry.props.willListen) {
           console.log("playerController: start listen")
-          commands = {}
+          const commands = {}
           for (let c of this.entry.choices) {
             commands[c._id] = c.keywords
           }

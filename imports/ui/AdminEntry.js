@@ -47,7 +47,7 @@ class AdminEntry extends React.Component {
   }
 
   sanitize(doc) {
-    id = doc._id
+    const id = doc._id
     doc = entrySchema.clean(doc)
     if (id) doc._id = id
     return doc
