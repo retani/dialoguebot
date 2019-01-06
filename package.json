@@ -20,6 +20,6 @@
     "uniforms-unstyled": "^1.24.3"
   },
   "engines": {
-    "node": "8.8.1"
+    "node": "8.11.4"
   }
 }
