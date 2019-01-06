@@ -29,7 +29,7 @@ class AdminEntries extends React.Component {
       return;
     }
     console.log(target)
-    fr = new FileReader();
+    const fr = new FileReader();
     fr.onload = (progress)=>{
       //target.value = null;
       const data = progress.currentTarget.result
