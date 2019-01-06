@@ -16,12 +16,12 @@ export default () => {
           </li>
         </ul>
       </nav>
-      <figure className="qr-code">
+      {/* <figure className="qr-code">
         <img src="/qr-hugbie.herokuapp.com.png" />
         <figcaption>
         <small>^ URL of this page</small>
         </figcaption>
-      </figure>
+      </figure> */}
     </div>
   );
 };
